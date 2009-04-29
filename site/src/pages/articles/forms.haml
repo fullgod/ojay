@@ -34,6 +34,9 @@
     @form@ can be a CSS selector string or an element reference.
   * @Ojay.Forms.getData(form)@ - the same as @getQueryString()@, except that it returns
     the data as an object where the property names mirror the form's input names.
+  * @Ojay.Forms.submit(form)@ - this is like calling @form.submit()@, except that the form
+    submission is routed through Ojay's form rules system so any validation and Ajax rules
+    are checked before the submission is allowed to complete.
   
   h3. Visual styling
   
