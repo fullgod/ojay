@@ -12,7 +12,7 @@
  * @constructor
  * @class Forms.Checkbox
  */
-Ojay.Forms.Checkbox = new JS.Class(/* @scope Forms.Checkbox.prototype */{
+Ojay.Forms.Checkbox = new JS.Class('Ojay.Forms.Checkbox', /* @scope Forms.Checkbox.prototype */{
     include: Checkable,
     _inputType: 'checkbox',
     

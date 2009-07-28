@@ -5,7 +5,7 @@
  * @constructor
  * @class Tooltip
  */
-Ojay.Tooltip = new JS.Class(Ojay.ContentOverlay, /** @scope Ojay.Tooltip.prototype */{
+Ojay.Tooltip = new JS.Class('Ojay.Tooltip', Ojay.ContentOverlay, /** @scope Ojay.Tooltip.prototype */{
     /**
      * <p>Initializes the tooltip. The constructor differs from that of its parent classes
      * in that you must pass in the text for the tooltip as the first argument, followed

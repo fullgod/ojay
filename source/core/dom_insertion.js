@@ -10,7 +10,7 @@
  * @contructor
  * @class DomInsertion
  */
-Ojay.DomInsertion = new JS.Class(/** @scope Ojay.DomInsertion.prototype */{
+Ojay.DomInsertion = new JS.Class('Ojay.DomInsertion', /** @scope Ojay.DomInsertion.prototype */{
     
     /**
      * @param {Array|HTMLElement} elements

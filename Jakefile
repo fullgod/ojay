@@ -4,7 +4,7 @@ spec = Oyster.spec do
   string :version
 end
 
-jake :version do
+jake_helper :version do
   begin
     opts = spec.parse(options[:unclaimed])
     return opts[:version] if opts[:version]
@@ -16,7 +16,7 @@ jake :version do
   end
 end
 
-jake :after_build do |build|
+jake_hook :build_complete do |build|
   %w(README LICENSE CHANGELOG).each do |doc|
     FileUtils.copy doc, "#{ build.build_directory }/../#{ doc }"
   end

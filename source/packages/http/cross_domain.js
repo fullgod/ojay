@@ -9,20 +9,29 @@
     };
     
     var IFRAME_NAME        = '__ojay_cross_domain__',
-        JSONP_HANDLER_NAME = '__ojay_jsonp_handler__';
+        JSONP_HANDLER_NAME = '__ojay_jsonp_handler__',
+        HANDLER_COUNT      = 0;
     
     var createIframe = function() {
         Ojay(document.body).insert('<iframe name="' + IFRAME_NAME + '" style="display: none;"></iframe>', 'top');
     }.runs(1);
     
-    var handleJsonP = function(callback, data) {
-        var args = Array.from(arguments), callback = args.shift();
-        callback.apply(null, args);
+    var getHandlerId = function() {
+        return JSONP_HANDLER_NAME + (HANDLER_COUNT++);
     };
     
-    var removeHandler = function() {
-        delete window[JSONP_HANDLER_NAME];
+    var handleJsonP = function(callback, id, data) {
+        var args     = Array.from(arguments),
+            callback = args.shift(),
+            id       = args.shift();
+        callback.apply(null, args);
+        removeHandler(id);
     };
+    
+    var removeHandler = function(id) {
+        window[id] = null;
+        try { delete window[id] } catch (e) {}
+    }.curry();
     
     var determineAssetType = function(url) {
         switch (true) {
@@ -111,10 +120,11 @@
             if (typeof callbacks == 'function') callbacks = {onSuccess: callbacks};
             
             if (uri.params.jsonp && callbacks.onSuccess) {
-                uri.setParam(uri.params.jsonp, JSONP_HANDLER_NAME);
-                delete uri.params.jsonp;
-                window[JSONP_HANDLER_NAME] = handleJsonP.partial(callbacks.onSuccess);
-                callbacks.onSuccess = removeHandler;
+                var handlerID = getHandlerId();
+                uri.setParam(uri.params.jsonp, handlerID);
+                if (uri.params.jsonp !== 'jsonp') delete uri.params.jsonp;
+                window[handlerID] = handleJsonP.partial(callbacks.onSuccess, handlerID);
+                callbacks.onSuccess = null;
             }
             
             YAHOO.util.Get[assetType](uri.toString(), callbacks);

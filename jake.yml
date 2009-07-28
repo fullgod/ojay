@@ -18,16 +18,39 @@ packages:
     directory:        external
     header:           COPYRIGHT
     files:
-      - class
+      - core
       - method_chain
       - observable
       - state
   
   core:
     directory:        core
-    requires:
-      - yui
-      - ojay/js-class-min
+    meta:
+      requires:
+        - YAHOO
+        - YAHOO.util.Selector
+        - YAHOO.util.Dom
+        - YAHOO.util.Region
+        - YAHOO.util.Event
+        - YAHOO.util.ColorAnim
+        - YAHOO.util.Scroll
+        - YAHOO.util.Easing
+        - YAHOO.lang
+        - YAHOO.lang.JSON
+        - JS.Class
+        - JS.Observable
+        - JS.State
+        - JS.MethodChain
+      provides:
+        - Ojay
+        - Ojay.DomCollection
+        - Ojay.DomInsertion
+        - Ojay.HtmlBuilder
+        - Ojay.HTML
+        - Ojay.Animation
+        - Ojay.Region
+        - Ojay.Sequence
+        - Ojay.Observable
     files:
       - core
       - utils
@@ -49,14 +72,29 @@ packages:
   
   pkg/accordion:
     directory:        packages/accordion
+    meta:
+      requires:
+        - Ojay
+        - Ojay.HTML
+        - Ojay.Animation
+        - Ojay.Observable
+      provides:
+        - Ojay.Accordion
     files:
       - accordion
       - section
   
   pkg/http:
     directory:        packages/http
-    requires:
-      - ojay/core-min
+    meta:
+      requires:
+        - YAHOO.util.Connect
+        - YAHOO.util.Get
+        - Ojay
+        - Ojay.Observable
+      provides:
+        - Ojay.HTTP
+        - Ojay.URI
     files:
       - ajax
       - cross_domain
@@ -64,9 +102,18 @@ packages:
   
   pkg/forms:
     directory:        packages/forms
-    requires:
-      - ojay/core-min
-      - ojay/pkg/http-min
+    meta:
+      requires:
+        - YAHOO.util.Connect
+        - YAHOO.util.KeyListener
+        - Ojay
+        - Ojay.HTML
+        - Ojay.Observable
+      provides:
+        - Ojay.Forms
+        - Ojay.Forms.Checkbox
+        - Ojay.Forms.RadioButtons
+        - Ojay.Forms.Select
     files:
       - begin
       - utils
@@ -84,15 +131,26 @@ packages:
   
   pkg/history:
     directory:        packages/history
-    requires:
-      - ojay/core-min
+    meta:
+      requires:
+        - YAHOO.util.History
+        - Ojay
+        - Ojay.HTML
+      provides:
+        - Ojay.History
     files:
       - history
   
   pkg/keyboard:
     directory:        packages/keyboard
-    requires:
-      - ojay/core-min
+    meta:
+      requires:
+        - YAHOO.util.Event
+        - YAHOO.util.KeyListener
+        - Ojay
+        - Ojay.Observable
+      provides:
+        - Ojay.Keyboard
     files:
       - begin
       - utils
@@ -105,15 +163,30 @@ packages:
   
   pkg/mouse:
     directory:        packages/mouse
-    requires:
-      - ojay/core-min
+    meta:
+      requires:
+        - YAHOO.util.Event
+        - Ojay
+        - Ojay.DomCollection
+        - Ojay.Region
+      provides:
+        - Ojay.Mouse
     files:
       - mouse
   
   pkg/overlay:
     directory:        packages/overlay
-    requires:
-      - ojay/core-min
+    meta:
+      requires:
+        - YAHOO.util.Event
+        - Ojay
+        - Ojay.Observable
+        - Ojay.HTML
+      provides:
+        - Ojay.Overlay
+        - Ojay.ContentOverlay
+        - Ojay.PageMask
+        - Ojay.Tooltip
     files:
       - begin
       - overlay
@@ -125,19 +198,36 @@ packages:
   
   pkg/paginator:
     directory:        packages/paginator
-    requires:
-      - ojay/core-min
-      - ojay/pkg/http-min
+    meta:
+      requires:
+        - YAHOO.util.Anim
+        - Ojay
+        - Ojay.HTML
+        - Ojay.Observable
+        - Ojay.HTTP
+      provides:
+        - Ojay.Paginator
+        - Ojay.AjaxPaginator
+        - Ojay.Paginator.Controls
+        - Ojay.FilmStrip
     files:
+      - paginatable
       - paginator
       - ajax_paginator
       - controls
+      - film_strip
   
   pkg/tabs:
     directory:        packages/tabs
-    requires:
-      - ojay/core-min
-      - ojay/pkg/http-min
+    meta:
+      requires:
+        - Ojay
+        - Ojay.Observable
+        - Ojay.HTML
+        - Ojay.HTTP
+      provides:
+        - Ojay.Tabs
+        - Ojay.AjaxTabs
     files:
       - tabs
       - ajax_tabs

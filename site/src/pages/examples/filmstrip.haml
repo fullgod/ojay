@@ -1,0 +1,75 @@
+- @title = 'Filmstrip gallery'
+=javascripts *%w(dragdrop slider).map { |s| "http://yui.yahooapis.com/2.7.0/build/#{s}/#{s}-min.js" }
+
+#summary
+  :textile
+    h2. Filmstrip gallery using @Ojay.FilmStrip@
+    
+    Photos are by Flickr users
+    "tambako":http://www.flickr.com/photos/tambako, "gracesmith":http://www.flickr.com/photos/gracesmith,
+    "llee_wu":http://www.flickr.com/photos/13523064@N03, "marksein":http://www.flickr.com/photos/marksein,
+    "iamlonho":http://www.flickr.com/photos/iamlonho, "jcorrius":http://www.flickr.com/photos/jcorrius
+
+:plain
+    <style id="display-style" type="text/css">
+        #photos div {
+            float:        left;
+            padding:      4px;
+        }
+        
+        .paginator-controls {
+            width:          100%;
+            margin:         20px 0;
+            text-align:     center;
+        }
+        
+        .paginator-controls .previous,
+        .paginator-controls .next,
+        .paginator-controls .pages {
+            display:        inline;
+        }
+        
+        .paginator-controls .previous,
+        .paginator-controls .next,
+        .paginator-controls .pages span {
+            border:         1px solid #ccc;
+            cursor:         pointer;
+            font:           bold 12px Arial, sans-serif;
+            margin:         0 4px;
+            padding:        2px 4px;
+        }
+        
+        .paginator-controls .disabled {
+            color:          #ccc;
+            cursor:         default;
+        }
+        
+        .paginator-controls .hovered {
+            background:     #cef;
+        }
+        
+        .paginator-controls .pages .selected {
+            background:     #f30;
+            border-color:   #000;
+            color:          #fff;
+        }
+    </style>
+    
+    <div id="photos">
+        <div><img alt="" width="221" height="333" src="/images/filmstrip/01.jpg" /></div>
+        <div><img alt="" width="500" height="333" src="/images/filmstrip/02.jpg" /></div>
+        <div><img alt="" width="222" height="333" src="/images/filmstrip/03.jpg" /></div>
+        <div><img alt="" width="333" height="333" src="/images/filmstrip/04.jpg" /></div>
+        <div><img alt="" width="500" height="333" src="/images/filmstrip/05.jpg" /></div>
+        <div><img alt="" width="500" height="333" src="/images/filmstrip/06.jpg" /></div>
+        </div>
+    </div>
+    
+    <script id="display-script" type="text/javascript">
+        var strip = new Ojay.FilmStrip('#photos', {
+            width:      '100%',
+            overshoot:  false
+        });
+        strip.setup();
+        strip.addControls('after');
+    </script>

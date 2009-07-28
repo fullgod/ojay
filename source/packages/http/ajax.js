@@ -68,7 +68,7 @@
  * the POST request is made, it will be executed and the return value will be sent to the server
  * in the <tt>width</tt> parameter.</p>
  */
-Ojay.HTTP = new JS.Singleton(/** @scope Ojay.HTTP */{
+Ojay.HTTP = new JS.Singleton('Ojay.HTTP', /** @scope Ojay.HTTP */{
     include: Ojay.Observable,
     
     /**
@@ -102,7 +102,7 @@ Ojay.HTTP.VERBS.forEach(function(verb) {
  * @constructor
  * @class HTTP.Request
  */
-Ojay.HTTP.Request = new JS.Class(/** @scope Ojay.HTTP.Request.prototype */{
+Ojay.HTTP.Request = new JS.Class('Ojay.HTTP.Request', /** @scope Ojay.HTTP.Request.prototype */{
     
     /**
      * @param {String} verb         One of 'GET', 'POST', 'PUT', 'DELETE', or 'HEAD'
@@ -197,7 +197,7 @@ Ojay.HTTP.Request = new JS.Class(/** @scope Ojay.HTTP.Request.prototype */{
  * @constructor
  * @class HTTP.Response
  */
-Ojay.HTTP.Response = new JS.Class(/** @scope Ojay.HTTP.Response.prototype */{
+Ojay.HTTP.Response = new JS.Class('Ojay.HTTP.Response', /** @scope Ojay.HTTP.Response.prototype */{
     
     /**
      * @param {HTTP.Request} request an HTTP.Request object

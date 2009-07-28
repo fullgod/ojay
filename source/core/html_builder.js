@@ -78,7 +78,7 @@
  * @constructor
  * @class HtmlBuilder
  */
-Ojay.HtmlBuilder = new JS.Class(/* @scope Ojay.HtmlBuilder.prototype */{
+Ojay.HtmlBuilder = new JS.Class('Ojay.HtmlBuilder', /* @scope Ojay.HtmlBuilder.prototype */{
     
     /**
      * @param {HTMLElement} node
@@ -103,7 +103,7 @@ Ojay.HtmlBuilder = new JS.Class(/* @scope Ojay.HtmlBuilder.prototype */{
         },
         
         addTagName: function(name) {
-            this.prototype[name] = function() {
+            this.define(name, function() {
                 var node = document.createElement(name), arg, attr, style, appendable,
                     type = (arguments[0]||{}).type || 'text';
                 
@@ -138,7 +138,7 @@ Ojay.HtmlBuilder = new JS.Class(/* @scope Ojay.HtmlBuilder.prototype */{
                 }
                 if (this._rootNode) this._rootNode.appendChild(node);
                 return node;
-            };
+            });
         },
         
         /**

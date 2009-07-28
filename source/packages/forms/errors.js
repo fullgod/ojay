@@ -6,7 +6,7 @@
  * @class FormErrors
  * @private
  */
-var FormErrors = new JS.Class(/** @scope FormErrors.prototype */{
+var FormErrors = new JS.Class('Ojay.Forms.FormErrors', /** @scope FormErrors.prototype */{
     initialize: function(form) {
         var errors = {}, base = [];
         

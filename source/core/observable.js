@@ -63,7 +63,7 @@
  *
  * @module Observable
  */
-Ojay.Observable = new JS.Module({
+Ojay.Observable = new JS.Module('Ojay.Observable', {
     include: JS.Observable,
     
     /**

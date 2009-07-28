@@ -6,7 +6,7 @@
  * @constructor
  * @class Animation
  */
-Ojay.Animation = new JS.Class(/** @scope Ojay.Animation.prototype */{
+Ojay.Animation = new JS.Class('Ojay.Animation', /** @scope Ojay.Animation.prototype */{
     
     extend: /** @scope Ojay.Animation */{
         DEFAULT_YUI_CLASS: YAHOO.util.ColorAnim

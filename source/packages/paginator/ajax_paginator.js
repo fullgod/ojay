@@ -5,7 +5,7 @@
  * @constructor
  * @class AjaxPaginator
  */
-Ojay.AjaxPaginator = new JS.Class(Ojay.Paginator, /** @scope Ojay.AjaxPaginator.prototype */{
+Ojay.AjaxPaginator = new JS.Class('Ojay.AjaxPaginator', Ojay.Paginator, /** @scope Ojay.AjaxPaginator.prototype */{
     /**
      * <p><tt>AjaxPaginator</tt> takes the same initialization data as <tt>Paginator</tt>, but
      * with one extra required option: <tt>urls</tt>. This should be an array of URLs that

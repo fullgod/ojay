@@ -143,7 +143,7 @@ Ojay.History = (function(History) {
     },
     
         encode = function(param) {
-            var string = encodeURIComponent(decode(param));
+            var string = encodeURIComponent(param);
             for (var conv in CHARACTER_CONVERSIONS)
                 string = string.replace(conv, CHARACTER_CONVERSIONS[conv]);
             return string;

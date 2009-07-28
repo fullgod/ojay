@@ -33,7 +33,7 @@ YAHOO.util.Event.onDOMReady(function() {
         .insertInto('#message');
     
     Ojay('#get-util').on('click', function() {
-        Ojay.HTTP.load('/service/json.html', {}, {
+        Ojay.HTTP.load('/service/json.html?jsonp=callback', {}, {
             onSuccess: function(){}.traced()
         });
         Ojay.HTTP.GET('/service/json.html')._(function() { alert(this.responseText); });

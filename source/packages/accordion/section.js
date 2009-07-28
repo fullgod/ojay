@@ -7,7 +7,7 @@ Ojay.Accordion.extend(/** @scope Ojay.Accordion */{
      * @constructor
      * @class Accordion.Section
      */
-    Section: new JS.Class(/** @scope Ojay.Accordion.Section.prototype */{
+    Section: new JS.Class('Ojay.Accordion.Section', /** @scope Ojay.Accordion.Section.prototype */{
         include: Ojay.Observable,
         
         extend: /** @scope Ojay.Accordion.Section */{
@@ -148,7 +148,7 @@ Ojay.Accordion.extend(/** @scope Ojay.Accordion */{
      * @constructor
      * @class Ojay.Accordion.HorizontalSection
      */
-    HorizontalSection:  new JS.Class(Ojay.Accordion.Section,
+    HorizontalSection:  new JS.Class('Ojay.Accordion.HorizontalSection', Ojay.Accordion.Section,
     /** @scope Ojay.Accordion.HorizontalSection.prototype */{
         param:  'width',
         
@@ -175,7 +175,7 @@ Ojay.Accordion.extend(/** @scope Ojay.Accordion */{
      * @constructor
      * @class Ojay.Accordion.VerticalSection
      */
-    VerticalSection:    new JS.Class(Ojay.Accordion.Section,
+    VerticalSection:    new JS.Class('Ojay.Accordion.VerticalSection', Ojay.Accordion.Section,
     /** @scope Ojay.Accordion.VerticalSection.prototype */{
         param:  'height',
         

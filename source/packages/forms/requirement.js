@@ -11,7 +11,7 @@ var isPresent = function(value) {
  * @class FormRequirement
  * @private
  */
-var FormRequirement = new JS.Class({
+var FormRequirement = new JS.Class('Ojay.Forms.FormRequirement', {
     /**
      * @param {FormDescription} form
      * @param {String} field

@@ -7,7 +7,7 @@
  * @constructor
  * @class PageMask
  */
-Ojay.PageMask = new JS.Class(Ojay.Overlay, /** @scope Ojay.PageMask.prototype */{
+Ojay.PageMask = new JS.Class('Ojay.PageMask', Ojay.Overlay, /** @scope Ojay.PageMask.prototype */{
     extend: /** @scope Ojay.PageMask */{
         DEFAULT_COLOR:  '000000',
         DEFAULT_OPACITY:    0.5,

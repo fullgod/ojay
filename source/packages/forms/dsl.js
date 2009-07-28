@@ -196,7 +196,7 @@ var DSL = {
  * @class FormDSL
  * @private
  */
-var FormDSL = new JS.Class(/** @scope FormDSL.prototype */{
+var FormDSL = new JS.Class('Ojay.Forms.FormDSL', /** @scope FormDSL.prototype */{
     /**
      * @param {FormDescription} form
      */
@@ -259,7 +259,7 @@ var FormDSLMethods = ['requires', 'expects', 'validates', 'submitsUsingAjax', 'h
  * @class RequirementDSL
  * @private
  */
-var RequirementDSL = new JS.Class(/** @scope RequirementDSL.prototype */{
+var RequirementDSL = new JS.Class('Ojay.Forms.RequirementDSL', /** @scope RequirementDSL.prototype */{
     /**
      * @param {FormRequirement} requirement
      */
@@ -422,7 +422,7 @@ RequirementDSL.include(FormDSLMethods.reduce(function(memo, method) {
  * @class WhenDSL
  * @private
  */
-var WhenDSL = new JS.Class(/** @scope WhenDSL.prototype */{
+var WhenDSL = new JS.Class('Ojay.Forms.WhenDSL', /** @scope WhenDSL.prototype */{
     /**
      * @param {FormDescription} form
      */
@@ -461,7 +461,7 @@ var WhenDSL = new JS.Class(/** @scope WhenDSL.prototype */{
  * @class BeforeDSL
  * @private
  */
-var BeforeDSL = new JS.Class({
+var BeforeDSL = new JS.Class('Ojay.Forms.BeforeDSL', {
     /**
      * @param {FormDescription} form
      */

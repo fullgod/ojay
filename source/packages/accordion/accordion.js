@@ -56,7 +56,7 @@
  * @constructor
  * @class Accordion
  */
-Ojay.Accordion = new JS.Class(/** @scope Ojay.Accordion.prototype */{
+Ojay.Accordion = new JS.Class('Ojay.Accordion', /** @scope Ojay.Accordion.prototype */{
     include: Ojay.Observable,
     
     extend: /** @scope Ojay.Accordion */{

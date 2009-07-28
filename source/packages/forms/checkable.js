@@ -6,7 +6,7 @@
  * @private
  * @module Checkable
  */
-var Checkable = new JS.Module(/** @scope Checkable */{
+var Checkable = new JS.Module('Ojay.Forms.Checkable', /** @scope Checkable */{
     include: Inputable,
     
     /**

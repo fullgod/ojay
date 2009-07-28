@@ -7,7 +7,7 @@
  * @class Paginator.Controls
  */
 Ojay.Paginator.extend(/** @scope Ojay.Paginator */{
-    Controls: new JS.Class(/** @scope Ojay.Paginator.Controls.prototype */{
+    Controls: new JS.Class('Ojay.Paginator.Controls', /** @scope Ojay.Paginator.Controls.prototype */{
         extend: /** @scope Ojay.Paginator.Controls */{
             CONTAINER_CLASS:    'paginator-controls',
             PREVIOUS_CLASS:     'previous',

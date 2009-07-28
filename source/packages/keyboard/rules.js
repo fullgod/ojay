@@ -6,7 +6,7 @@
  * @private
  * @class Rule
  */
-var Rule = new JS.Class({
+var Rule = new JS.Class('Ojay.Keyboard.Rule', {
     /**
      * @param {HTMLElement} node
      * @param {String|Array} keylist
@@ -95,7 +95,7 @@ var Rule = new JS.Class({
  * @public
  * @class RuleSet
  */
-Keyboard.RuleSet = new JS.Class({
+Keyboard.RuleSet = new JS.Class('Ojay.Keyboard.RuleSet', {
     /**
      * @param {HTMLElement} node
      * @param {Object} definitions

@@ -8,7 +8,7 @@
  * <p>This returns a <tt>Rule</tt> instance that lets you disable/enable the listener. See the
  * <tt>Rule</tt> class for more details.</p>
  */
-var Keyboard = Ojay.Keyboard = new JS.Singleton({
+var Keyboard = Ojay.Keyboard = new JS.Singleton('Ojay.Keyboard', {
     
     /**
      * <p>Returns a new <tt>Rule</tt> instance for the given node and key combination.</p>

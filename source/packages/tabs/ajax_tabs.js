@@ -2,7 +2,7 @@
  * @class AjaxTabs
  * @constructor
  */
-Ojay.AjaxTabs = new JS.Class(Ojay.Tabs, /** @scope Ojay.AjaxTabs.prototype */{
+Ojay.AjaxTabs = new JS.Class('Ojay.AjaxTabs', Ojay.Tabs, /** @scope Ojay.AjaxTabs.prototype */{
     
     /**
      * <p><tt>AjaxTabs</tt> takes slightly different initialization data to <tt>Tabs</tt>.

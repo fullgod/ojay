@@ -7,7 +7,7 @@
  * @class FormDescription
  * @private
  */
-var FormDescription = new JS.Class(/** @scope FormDescription.prototype */{
+var FormDescription = new JS.Class('Ojay.Forms.FormDescription', /** @scope FormDescription.prototype */{
     include: JS.Observable,
     
     /**

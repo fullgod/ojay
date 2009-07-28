@@ -6,7 +6,7 @@
  * @constructor
  * @class Ojay.Sequence
  */
-Ojay.Sequence = new JS.Class(/** @scope Ojay.Sequence.prototype */{
+Ojay.Sequence = new JS.Class('Ojay.Sequence', /** @scope Ojay.Sequence.prototype */{
     
     /**
      * @param {Array} list

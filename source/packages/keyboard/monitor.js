@@ -4,7 +4,7 @@
  * to add and remove from the list. This object may be consulted to find out whether
  * a particular key code is pressed.</p>
  */
-var Monitor = new JS.Singleton({
+var Monitor = new JS.Singleton('Ojay.Keyboard.Monitor', {
     _list: [],
     
     /**

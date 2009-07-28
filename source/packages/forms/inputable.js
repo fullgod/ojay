@@ -6,7 +6,7 @@
  * @module Inputable
  * @private
  */
-var Inputable = new JS.Module(/** @scope Inputable */{
+var Inputable = new JS.Module('Ojay.Forms.Inputable', /** @scope Inputable */{
     include: Ojay.Observable,
     
     extend: {

@@ -12,7 +12,7 @@
  * @constructor
  * @class Forms.Select
  */
-Ojay.Forms.Select = new JS.Class(/** @scope Forms.Select.prototype */{
+Ojay.Forms.Select = new JS.Class('Ojay.Forms.Select', /** @scope Forms.Select.prototype */{
     include: [JS.State, Inputable],
     _inputType: 'select',
     
@@ -26,7 +26,7 @@ Ojay.Forms.Select = new JS.Class(/** @scope Forms.Select.prototype */{
          * @constructor
          * @class Forms.Select.Option
          */
-        Option: new JS.Class(/** @scope Forms.Select.Option.prototype */{
+        Option: new JS.Class('Ojay.Forms.Select.Option', /** @scope Forms.Select.Option.prototype */{
             /**
              * @param {Forms.Select} select
              * @param {HTMLElement} option

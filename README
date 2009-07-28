@@ -1,5 +1,5 @@
 Ojay -- a developer-friendly wrapper for the Yahoo! User Interface library
-Copyright (c) 2007-08 the OTHER media Limited, written by James Coglan.
+Copyright (c) 2007-09 the OTHER media Limited, written by James Coglan.
 
 http://ojay.othermedia.org
 
@@ -31,6 +31,7 @@ YUI build files used by Ojay in one concatenated file. It includes the following
   * animation
   * connection
   * get
+  * cookie
   * history
 
 Further information and docs are available on the Ojay site: http://ojay.othermedia.org
@@ -53,8 +54,7 @@ gem install staticmatic
 
 Once you've got Ruby installed, open a command prompt in the root directory (one level up
 from /source) and type 'jake'. That command will combine and compress the source files and
-place them in the /build directory. Note that you must build the library from within the
-Subversion working copy, as the build process uses SVN to extract version information.
+place them in the /build directory.
 
 To start a server for the docs/test site, type
 

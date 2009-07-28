@@ -13,7 +13,7 @@
  * @constructor
  * @class ContentOverlay
  */
-Ojay.ContentOverlay = new JS.Class(Ojay.Overlay, /** @scope Ojay.ContentOverlay.prototype */{
+Ojay.ContentOverlay = new JS.Class('Ojay.ContentOverlay', Ojay.Overlay, /** @scope Ojay.ContentOverlay.prototype */{
     extend: /** @scope Ojay.ContentOverlay */{
         CONTENT_CLASS:      'overlay-content'
     },

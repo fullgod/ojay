@@ -4,7 +4,7 @@
  * their behaviour to override the default behaviour. Some browsers do not allow certain
  * key comibnations to be overridden, so choose your key combinations carefully.</p>
  */
-var Disabler = new JS.Singleton({
+var Disabler = new JS.Singleton('Ojay.Keyboard.Disabler', {
     _rules: [],
     
     /**

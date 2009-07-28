@@ -2,7 +2,7 @@
  * @constructor
  * @class URI
  */
-Ojay.URI = new JS.Class({
+Ojay.URI = new JS.Class('Ojay.URI', {
     extend: {
         /**
          * @param {String} string
@@ -88,7 +88,7 @@ Ojay.URI = new JS.Class({
         var string = this._getPathWithHost(), params = [];
         var queryString = this.getQueryString();
         if (queryString.length) string += '?' + queryString;
-        if (this.hash) string += '#' + this.hash;
+        if (typeof this.hash === 'string') string += '#' + this.hash;
         return string;
     },
     

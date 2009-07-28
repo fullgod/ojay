@@ -6,7 +6,7 @@
      * @constructor
      * @class Region
      */
-    Ojay.Region = new JS.Class(/** @scope Ojay.Region.prototype */{
+    Ojay.Region = new JS.Class('Ojay.Region', /** @scope Ojay.Region.prototype */{
         
         contains:   Region.prototype.contains,
         getArea:    Region.prototype.getArea,

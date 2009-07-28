@@ -53,7 +53,7 @@
  * @constructor
  * @class Tabs
  */
-Ojay.Tabs = new JS.Class(/** @scope Ojay.Tabs.prototype */{
+Ojay.Tabs = new JS.Class('Ojay.Tabs', /** @scope Ojay.Tabs.prototype */{
     include: [Ojay.Observable, JS.State],
       
     /**
@@ -134,7 +134,8 @@ Ojay.Tabs = new JS.Class(/** @scope Ojay.Tabs.prototype */{
                 
                 var toggles = Ojay( Ojay.HTML.ul({className: options.togglesClass}, function (HTML) {
                     self._tabGroup.children(options.toggleSelector).forEach(function(header, i) {
-                        var toggle = Ojay( HTML.li(header.node.innerHTML) ).addClass('toggle-' + (i+1));
+                        var toggle = Ojay( HTML.li() ).addClass('toggle-' + (i+1));
+                        toggle.setContent(header.node.innerHTML);
                         if (i === 0) toggle.addClass('first');
                         if (i === self._tabGroup.length - 1) toggle.addClass('last');
                         self._toggles.push(toggle);
@@ -242,7 +243,7 @@ Ojay.Tabs = new JS.Class(/** @scope Ojay.Tabs.prototype */{
          * @constructor
          * @class Tab
          */
-        Tab: new JS.Class(/** @scope Ojay.Tabs.Tab.prototype */{
+        Tab: new JS.Class('Ojay.Tabs.Tab', /** @scope Ojay.Tabs.Tab.prototype */{
             /**
              * @param {Ojay.Tab} group
              * @param {HTMLElement} container

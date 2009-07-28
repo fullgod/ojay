@@ -30,7 +30,7 @@
  * the <tt>position</tt> argument. Again, use <tt>scope</tt> to set the meaning of <tt>this</tt>
  * inside the callback.</p>
  */
-Ojay.Mouse = new JS.Singleton(/** @scope Ojay.Mouse */{
+Ojay.Mouse = new JS.Singleton('Ojay.Mouse', /** @scope Ojay.Mouse */{
     include: JS.Observable,
     
     initialize: function() {
