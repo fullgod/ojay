@@ -362,7 +362,8 @@
                     value = Number(options[property]);
                     if (value === 0) options[property] = 0.001;
                     if (value === 1) {
-                        Dom.setStyle(this, 'filter', '');
+                        for (var i = 0, n = this.length; i < n; i++)
+                            this[i].style.removeAttribute('filter');
                         continue;
                     }
                 }

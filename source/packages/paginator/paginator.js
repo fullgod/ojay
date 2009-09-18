@@ -4,7 +4,7 @@
  * of series of items of the same size that can be grouped into pages. For example, an image
  * gallery could be set up as a series of floated divs or a list...</p>
  *
- *     &lt;div id="gallery"&gt;
+ * <pre><code>    &lt;div id="gallery"&gt;
  *         &lt;div class="item"&gt;&lt;img src="01.jpg" /&gt;&lt;/div&gt;
  *         &lt;div class="item"&gt;&lt;img src="02.jpg" /&gt;&lt;/div&gt;
  *         &lt;div class="item"&gt;&lt;img src="03.jpg" /&gt;&lt;/div&gt;
@@ -13,13 +13,13 @@
  *         &lt;div class="item"&gt;&lt;img src="06.jpg" /&gt;&lt;/div&gt;
  *         &lt;div class="item"&gt;&lt;img src="07.jpg" /&gt;&lt;/div&gt;
  *         &lt;div class="item"&gt;&lt;img src="08.jpg" /&gt;&lt;/div&gt;
- *     &lt;/div&gt;
+ *     &lt;/div&gt;</code></pre>
  *
  * <p>A <tt>Paginator</tt>, when applied to <tt>#gallery</tt>, will wrap its child elements in
  * a scrollable element that can be controlled using the <tt>Paginator</tt> API. So, your markup
  * will now look like:</p>
  *
- *     &lt;div class="paginator"&gt;
+ * <pre><code>    &lt;div class="paginator"&gt;
  *         &lt;div id="gallery"&gt;
  *             &lt;div class="page"&gt;
  *                 &lt;div class="item"&gt;&lt;img src="01.jpg" /&gt;&lt;/div&gt;
@@ -36,7 +36,7 @@
  *                 &lt;div class="item"&gt;&lt;img src="08.jpg" /&gt;&lt;/div&gt;
  *             &lt;/div&gt;
  *         &lt;/div&gt;
- *     &lt;/div&gt;
+ *     &lt;/div&gt;</code></pre>
  *
  * <p>The outer element is referred to as the 'container', and the inner element the 'subject'.
  * <tt>Paginator</tt> objects publish a number of events -- they are as follows:</p>
@@ -47,6 +47,10 @@
  *      <li><tt>firstpage</tt> - when the paginator reaches the first page</li>
  *      <li><tt>lastpage</tt> - when the paginator reaches the last page</li>
  *      <li><tt>focusitem</tt> - when <tt>focusItem()</tt> is called</li>
+ *      <li><tt>pagecreate</tt> - when a new page is created</li>
+ *      <li><tt>pagedestroy</tt> - when a page is removed</li>
+ *      <li><tt>itemadd</tt> - when a new item is added</li>
+ *      <li><tt>itemremove</tt> - when an item is removed</li>
  * </ul>
  *
  * <p>See the website for further documentation and graphical examples.</p> 
@@ -87,11 +91,15 @@ Ojay.Paginator = new JS.Class('Ojay.Paginator', /** @scope Ojay.Paginator.protot
      * options. Available options are:</p>
      *
      * <ul>
-     *      <li><tt>width</tt> - the width as a string, in any units, e.g. '512px'. Required.</li>
-     *      <li><tt>height</tt> - the height as a string, in any units, e.g. '512px'. Required.</li>
-     *      <li><tt>scrollTime</tt> - the duration of the scoll effect in seconds. Optional.</li>
-     *      <li><tt>easing</tt> - sets the name of the easing effect to use. Optional.</li>
-     *      <li><tt>direction</tt> - 'horizontal' or 'vertical', sets scroll direction. Required.</li>
+     *      <li><tt>width</tt> - the width as a string, in any units, e.g. '512px'.</li>
+     *      <li><tt>height</tt> - the height as a string, in any units, e.g. '512px'.</li>
+     *      <li><tt>rows</tt> - number of grid rows after pagination, alternative to <tt>height</tt>.</li>
+     *      <li><tt>columns</tt> - number of grid columns after pagination, alternative to <tt>width</tt>.</li>
+     *      <li><tt>scrollTime</tt> - the duration of the scoll effect in seconds.</li>
+     *      <li><tt>easing</tt> - sets the name of the easing effect to use.</li>
+     *      <li><tt>direction</tt> - 'horizontal' or 'vertical', sets scroll direction.</li>
+     *      <li><tt>pushFade</tt> - duration for fade-in animation when new items are added.</li>
+     *      <li><tt>pushSlide</tt> - duration for slide animation when new items are added.</li>
      * </ul>
      *
      * @param {String|HTMLElement|DomCollection} subject
@@ -147,13 +155,6 @@ Ojay.Paginator = new JS.Class('Ojay.Paginator', /** @scope Ojay.Paginator.protot
     getTotalOffset: function() {
         var method = (this._options.direction == 'vertical') ? 'getHeight' : 'getWidth';
         return this.getRegion()[method]() * (this._numPages - 1);
-    },
-    
-    /**
-     * @returns {Number}
-     */
-    getCurrentOffset: function() {
-        return this._reportedOffset;
     },
     
     /**
@@ -370,43 +371,13 @@ Ojay.Paginator = new JS.Class('Ojay.Paginator', /** @scope Ojay.Paginator.protot
              * @returns {Paginator}
              */
             setScroll: function(amount, options, callback, scope) {
-                var options     = options || {},
-                    orientation = this._options.direction,
-                    scrollTime  = options._scrollTime || this._options.scrollTime,
-                    pages       = this._numPages,
-                    total       = this.getTotalOffset(),
-                    chain       = new JS.MethodChain(),
-                    settings;
+                var pages = this._numPages,
+                    total = this.getTotalOffset();
                 
-                if (amount >= 0 && amount <= 1) amount = amount * total;
+                var result = this.callSuper(),
+                    reportedOffset = Math.min(Math.max(this._reportedOffset / total, 0), 1);
                 
                 this._elements._items.removeClass('focused');
-                options = options || {};
-                
-                if (options.animate && YAHOO.util.Anim) {
-                    this.setState('SCROLLING');
-                    settings = (orientation == 'vertical')
-                            ? { top: {to: -amount} }
-                            : { left: {to: -amount} };
-                    this._elements._subject.animate(settings,
-                        scrollTime, {easing: this._options.easing})._(function(self) {
-                        self.setState('READY');
-                        chain.fire(scope || self);
-                        if (callback) callback.call(scope || null);
-                    }, this);
-                } else {
-                    settings = (orientation == 'vertical')
-                            ? { top: (-amount) + 'px' }
-                            : { left: (-amount) + 'px' };
-                    this._elements._subject.setStyle(settings);
-                }
-                
-                var reportedOffset = amount/total;
-                if (reportedOffset < 0) reportedOffset = 1;
-                if (reportedOffset > 1) reportedOffset = 0;
-                this._reportedOffset = amount;
-                
-                if (!options.silent) this.notifyObservers('scroll', reportedOffset, total);
                 
                 var page = (pages * reportedOffset).ceil() || 1;
                 if (page != this._currentPage) {
@@ -417,7 +388,7 @@ Ojay.Paginator = new JS.Class('Ojay.Paginator', /** @scope Ojay.Paginator.protot
                     if (page == pages) this.notifyObservers('lastpage');
                 }
                 
-                return (options.animate && YAHOO.util.Anim) ? chain : this;
+                return result;
             },
             
             /**
@@ -610,8 +581,6 @@ Ojay.Paginator = new JS.Class('Ojay.Paginator', /** @scope Ojay.Paginator.protot
                 this.notifyObservers('pagedestroy');
                 this.notifyObservers('scroll', offset, this.getTotalOffset());
             }
-        },
-        
-        SCROLLING: {}
+        }
     }
 });

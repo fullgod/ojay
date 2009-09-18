@@ -1,3 +1,6 @@
+/**
+ * @module Ojay.Paginatable
+ */
 Ojay.Paginatable = new JS.Module('Ojay.Paginatable', {
     include: [Ojay.Observable, JS.State],
     
@@ -72,6 +75,13 @@ Ojay.Paginatable = new JS.Module('Ojay.Paginatable', {
     },
     
     /**
+     * @returns {Number}
+     */
+    getCurrentOffset: function() {
+        return this._reportedOffset;
+    },
+    
+    /**
      * <p>Places a default set of UI controls before or after the <tt>Paginator</tt> in the
      * document and returns a <tt>Paginator.Controls</tt> instance representing this UI.</p>
      * @returns {Paginator.Controls}
@@ -118,8 +128,48 @@ Ojay.Paginatable = new JS.Module('Ojay.Paginatable', {
                 
                 this.changeState({page: page}, callback, scope);
                 return this;
+            },
+            
+            setScroll: function(amount, options, callback, scope) {
+                var options    = options || {},
+                    scrollTime = options._scrollTime || this._options.scrollTime,
+                    vertical   = (this._options.direction == 'vertical'),
+                    total      = this.getTotalOffset(),
+                    chain      = new JS.MethodChain(),
+                    settings;
+                
+                if (amount >= 0 && amount <= 1) amount = amount * total;
+                
+                if (options.animate && YAHOO.util.Anim) {
+                    this.setState('SCROLLING');
+                    settings = vertical
+                            ? { top: {to: -amount} }
+                            : { left: {to: -amount} };
+                    this._elements._subject.animate(settings,
+                        scrollTime, {easing: this._options.easing})._(function(self) {
+                        self.setState('READY');
+                        chain.fire(scope || self);
+                        if (callback) callback.call(scope || null);
+                    }, this);
+                } else {
+                    settings = vertical
+                            ? { top: (-amount) + 'px' }
+                            : { left: (-amount) + 'px' };
+                    this._elements._subject.setStyle(settings);
+                }
+                
+                var reportedOffset = amount/total;
+                if (reportedOffset < 0) reportedOffset = 1;
+                if (reportedOffset > 1) reportedOffset = 0;
+                this._reportedOffset = amount;
+                
+                if (!options.silent) this.notifyObservers('scroll', reportedOffset, total);
+                
+                return (options.animate && YAHOO.util.Anim) ? chain : this;
             }
-        }
+        },
+        
+        SCROLLING: {}
     }
 });
 

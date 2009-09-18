@@ -27,30 +27,34 @@ packages:
     directory:        core
     meta:
       requires:
-        - YAHOO
-        - YAHOO.util.Selector
-        - YAHOO.util.Dom
-        - YAHOO.util.Region
-        - YAHOO.util.Event
-        - YAHOO.util.ColorAnim
-        - YAHOO.util.Scroll
-        - YAHOO.util.Easing
-        - YAHOO.lang
-        - YAHOO.lang.JSON
         - JS.Class
-        - JS.Observable
-        - JS.State
+        - JS.Kernel
         - JS.MethodChain
+        - JS.Module
+        - JS.Observable
+        - YAHOO
+        - YAHOO.env.ua
+        - YAHOO.lang
+        - YAHOO.util.Dom
+        - YAHOO.util.Event
+        - YAHOO.util.Region
+      uses:
+        - YAHOO.lang.JSON
+        - YAHOO.util.ColorAnim
+        - YAHOO.util.Easing
+        - YAHOO.util.Selector
+        - YAHOO.util.Scroll
       provides:
         - Ojay
+        - Ojay.Animation
         - Ojay.DomCollection
         - Ojay.DomInsertion
-        - Ojay.HtmlBuilder
         - Ojay.HTML
-        - Ojay.Animation
-        - Ojay.Region
-        - Ojay.Sequence
+        - Ojay.HtmlBuilder
         - Ojay.Observable
+        - Ojay.Region
+        - Ojay.Selectors
+        - Ojay.Sequence
     files:
       - core
       - utils
@@ -74,9 +78,9 @@ packages:
     directory:        packages/accordion
     meta:
       requires:
+        - JS.Class
         - Ojay
         - Ojay.HTML
-        - Ojay.Animation
         - Ojay.Observable
       provides:
         - Ojay.Accordion
@@ -88,10 +92,14 @@ packages:
     directory:        packages/http
     meta:
       requires:
-        - YAHOO.util.Connect
-        - YAHOO.util.Get
+        - JS.Class
+        - JS.MethodChain
+        - JS.Singleton
         - Ojay
         - Ojay.Observable
+      uses:
+        - YAHOO.util.Connect
+        - YAHOO.util.Get
       provides:
         - Ojay.HTTP
         - Ojay.URI
@@ -104,11 +112,18 @@ packages:
     directory:        packages/forms
     meta:
       requires:
-        - YAHOO.util.Connect
+        - JS.Class
+        - JS.MethodChain
+        - JS.Module
+        - JS.Observable
+        - JS.State
         - YAHOO.util.KeyListener
         - Ojay
         - Ojay.HTML
         - Ojay.Observable
+      uses:
+        - YAHOO.util.Connect
+        - Ojay.HTTP
       provides:
         - Ojay.Forms
         - Ojay.Forms.Checkbox
@@ -133,6 +148,8 @@ packages:
     directory:        packages/history
     meta:
       requires:
+        - JS.Class
+        - JS.Interface
         - YAHOO.util.History
         - Ojay
         - Ojay.HTML
@@ -145,10 +162,12 @@ packages:
     directory:        packages/keyboard
     meta:
       requires:
+        - JS.Class
+        - JS.Singleton
+        - YAHOO.env.ua
         - YAHOO.util.Event
         - YAHOO.util.KeyListener
         - Ojay
-        - Ojay.Observable
       provides:
         - Ojay.Keyboard
     files:
@@ -165,10 +184,13 @@ packages:
     directory:        packages/mouse
     meta:
       requires:
-        - YAHOO.util.Event
+        - JS.MethodChain
+        - JS.Observable
+        - JS.Singleton
         - Ojay
         - Ojay.DomCollection
         - Ojay.Region
+        - YAHOO.util.Event
       provides:
         - Ojay.Mouse
     files:
@@ -178,13 +200,23 @@ packages:
     directory:        packages/overlay
     meta:
       requires:
+        - JS.Class
+        - JS.Interface
+        - JS.MethodChain
+        - JS.Singleton
+        - JS.State
+        - YAHOO.env.ua
         - YAHOO.util.Event
         - Ojay
-        - Ojay.Observable
         - Ojay.HTML
+        - Ojay.HtmlBuilder
+        - Ojay.Observable
+        - Ojay.Region
+      uses:
+        - YAHOO.util.Anim
       provides:
-        - Ojay.Overlay
         - Ojay.ContentOverlay
+        - Ojay.Overlay
         - Ojay.PageMask
         - Ojay.Tooltip
     files:
@@ -200,16 +232,21 @@ packages:
     directory:        packages/paginator
     meta:
       requires:
-        - YAHOO.util.Anim
+        - JS.Class
+        - JS.MethodChain
+        - JS.Module
+        - JS.State
         - Ojay
         - Ojay.HTML
         - Ojay.Observable
+      uses:
         - Ojay.HTTP
+        - YAHOO.util.Anim
       provides:
-        - Ojay.Paginator
         - Ojay.AjaxPaginator
-        - Ojay.Paginator.Controls
         - Ojay.FilmStrip
+        - Ojay.Paginator
+        - Ojay.Paginator.Controls
     files:
       - paginatable
       - paginator
@@ -221,13 +258,16 @@ packages:
     directory:        packages/tabs
     meta:
       requires:
+        - JS.Class
+        - JS.MethodChain
+        - JS.State
         - Ojay
-        - Ojay.Observable
         - Ojay.HTML
         - Ojay.HTTP
+        - Ojay.Observable
       provides:
-        - Ojay.Tabs
         - Ojay.AjaxTabs
+        - Ojay.Tabs
     files:
       - tabs
       - ajax_tabs
