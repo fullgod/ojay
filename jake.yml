@@ -272,7 +272,7 @@ packages:
     files:
       - tabs
       - ajax_tabs
-      - gallery_tabs
+      - image_tabs
 
 bundles:
   all:
