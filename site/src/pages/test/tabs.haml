@@ -1,30 +1,56 @@
 %h1 Tabs tests
 
 :plain
-  <style type="text/css">
-    #container1 {border:1px solid #ccc; clear:both;}
-    .tab {clear:both; padding:9px;}
-    .tab P {margin:0 0 1em 0;}
-    .toggles {margin:0; padding:0 0 0 10px; *zoom:1;}
-    .toggles LI {float:left; cursor:pointer; list-style:none; margin:0 5px -1px 0; border:1px solid #ccc; padding:9px;  _position:relative;}
-    .toggles LI.selected {border-bottom-color:#fff; background-color:#fff;}
-  </style>
+    <style type="text/css">
+        #container1 {margin-bottom:30px; border:1px solid #ccc; clear:both;}
+        #container1 .tab {clear:both; padding:9px;}
+        #container1 .tab P {margin:0 0 1em 0;}
+        .toggles {margin:0; padding:0 0 0 10px; *zoom:1;}
+        .toggles LI {float:left; cursor:pointer; list-style:none; margin:0 5px -1px 0; border:1px solid #ccc; padding:9px;  _position:relative;}
+        .toggles LI.selected {border-bottom-color:#fff; background-color:#fff;}
+        
+        #container2 {width:192px; height:192px; border:1px solid #666; padding:32px;}
+        
+        #thumbnails {margin:6px 0 30px 0; padding:0;}
+        #thumbnails LI {float:left; margin:0 6px 0 0; border:1px solid #666; padding:0; list-style:none;}
+        #thumbnails .thumb {display:block; outline:none; text-decoration:none;}
+        #thumbnails .thumb IMG {display:block; margin:0; border:none; padding:0;}
+        #thumbnails .selected {opacity:0.5;}
+    </style>
+
+%h2
+    %code Ojay.Tabs
 
 #container1
-  .tab
-    .toggle First
-    %p
-      %q Have nothing in your houses that you do not know to be useful, or believe to be beautiful.
-      %cite William Morris
-  .tab
-    .toggle Second
-    %p
-      %q If you give someone Fortran, he has Fortran. If you give someone Lisp, he has any language he pleases.
-      %cite Larry Wall
-  .tab
-    .toggle Third
-    %p
-      %q A great many people think they are thinking when they are merely rearranging their prejudices.
-      %cite William James
+    .tab
+        .toggle First
+        %p
+            %q Have nothing in your houses that you do not know to be useful, or believe to be beautiful.
+            %cite William Morris
+    .tab
+        .toggle Second
+        %p
+            %q If you give someone Fortran, he has Fortran. If you give someone Lisp, he has any language he pleases.
+            %cite Larry Wall
+    .tab
+        .toggle Third
+        %p
+            %q A great many people think they are thinking when they are merely rearranging their prejudices.
+            %cite William James
+
+%h2
+    %code Ojay.GalleryTabs
+
+#container2
+%ul#thumbnails
+    %li
+        %a.thumb{:href => "/images/tabs/godel.jpg"}
+            %img{:src => "/images/tabs/godel_thumb.jpg"}
+    %li
+        %a.thumb{:href => "/images/tabs/escher.jpg"}
+            %img{:src => "/images/tabs/escher_thumb.jpg"}
+    %li
+        %a.thumb{:href => "/images/tabs/bach.jpg"}
+            %img{:src => "/images/tabs/bach_thumb.jpg"}
 
 =javascripts 'test/tabs'
