@@ -2,7 +2,8 @@
  * @class GalleryTabs
  * @constructor
  */
-Ojay.GalleryTabs = new JS.Class('Ojay.GalleryTabs', Ojay.AjaxTabs, /** @scope Ojay.GalleryTabs.prototype */{
+Ojay.ImageTabs = new JS.Class('Ojay.ImageTabs', Ojay.AjaxTabs, /** @scope Ojay.GalleryTabs.prototype */{
+    
     /**
      * <p>Tells the <tt>GalleryTabs</tt> to insert the image for the given
      * page, if the image is not already loaded. Fires <tt>pagerequest</tt> and

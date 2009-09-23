@@ -267,7 +267,7 @@ packages:
         - Ojay.Observable
       provides:
         - Ojay.AjaxTabs
-        - Ojay.GalleryTabs
+        - Ojay.ImageTabs
         - Ojay.Tabs
     files:
       - tabs
