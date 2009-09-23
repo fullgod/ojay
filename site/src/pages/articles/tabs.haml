@@ -30,11 +30,13 @@
   
   * @Ojay.Tabs@
   * @Ojay.AjaxTabs@
+  * @Ojay.ImageTabs@
   
   h3. Examples
   
   * "Simple tabs example, with history management":/examples/tabs.html
   * "Lazy-loading tabs from HTML links":/examples/ajax_tabs.html
+  * "Easy image gallery":/examples/image_tabs.html
   
   h3. Creating a group of @Tabs@
   
@@ -183,4 +185,36 @@
   </pre>
   
   See the "ajax tabs example":/examples/ajax_tabs.html for more ideas.
+  
+  h3. Image tabs
+  
+  @Ojay.ImageTabs@ provides a simple way to generate tabs from a list of linked thumbnails.
+  It works very much in the same way as @Ojay.AjaxTabs@, and implements the same API.
+  Start with some markup like the following:
+  
+  <pre class="prettyprint">    <ul id="thumbnails">
+          <li><a href="image1.jpg">
+              <img alt="First image" src="thumb1.jpg" />
+          </a></li>
+          
+          <li><a href="image2.jpg">
+              <img alt="Second image" src="thumb2.jpg" />
+          </a></li>
+          
+          <li><a href="image3.jpg">
+              <img alt="Third image" src="thumb3.jpg" />
+          </a></li>
+      </ul>
+      <div id="main-image"></div>
+  </pre>
+  
+  Then create a set of tabs by providing selectors (or element references) for the links
+  and the element which the tab content will be inserted into:
+  
+  <pre class="prettyprint">    var tabs = Ojay.ImageTabs.fromLinks('#thumbnails a', '#main-image');
+      tabs.setup();
+  </pre>
+  
+  This "image tabs example":/example/image_tabs.html demonstrates how to create a simple image
+  gallery with @Ojay.ImageTabs@.
 
