@@ -1,5 +1,5 @@
 /**
- * String extensions: Copyright (c) 2005-2008 Sam Stephenson / the Prototype team,
+ * String extensions: Copyright (c) 2005-2009 Sam Stephenson / the Prototype team,
  * released under an MIT-style license.
  */
 

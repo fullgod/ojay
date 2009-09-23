@@ -1,9 +1,13 @@
 - @title = 'Filmstrip gallery'
-=javascripts *%w(dragdrop slider).map { |s| "http://yui.yahooapis.com/2.7.0/build/#{s}/#{s}-min.js" }
+=javascripts *%w(dragdrop slider).map { |s| "http://yui.yahooapis.com/2.8.0r4/build/#{s}/#{s}-min.js" }
 
 #summary
   :textile
     h2. Filmstrip gallery using @Ojay.FilmStrip@
+    
+    Here we use @Ojay.FilmStrip@ to display a set of photos in a scrollable pane. @FilmStrip@
+    handles the variable scroll offset between items and we use @Ojay.History@ to allow
+    photos to be bookmarked.
     
     Photos are by Flickr users
     "tambako":http://www.flickr.com/photos/tambako, "gracesmith":http://www.flickr.com/photos/gracesmith,
@@ -13,8 +17,8 @@
 :plain
     <style id="display-style" type="text/css">
         #photos div {
-            float:        left;
-            padding:      4px;
+            float:          left;
+            padding:        4px;
         }
         
         .paginator-controls {
@@ -69,6 +73,10 @@
             width:      '100%',
             overshoot:  false
         });
+        
+        Ojay.History.manage(strip, 'gallery');
+        Ojay.History.initialize({asset: '/service/hello.html'});
+        
         strip.setup();
         strip.addControls('after');
     </script>

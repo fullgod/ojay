@@ -1,5 +1,5 @@
 /**
- * Functional extensions: Copyright (c) 2005-2008 Sam Stephenson / the Prototype team,
+ * Functional extensions: Copyright (c) 2005-2009 Sam Stephenson / the Prototype team,
  * released under an MIT-style license.
  */
 JS.extend(Function.prototype, /** @scope Function.prototype */{

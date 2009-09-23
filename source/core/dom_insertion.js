@@ -4,7 +4,7 @@
  * method instead. Its implementation is based on <a href="http://prototypejs.org/api/element/insert">that
  * used by Prototype</a>.</p>
  *
- * Document insertion code: Copyright (c) 2005-2008 Sam Stephenson / the Prototype team,
+ * Document insertion code: Copyright (c) 2005-2009 Sam Stephenson / the Prototype team,
  * released under an MIT-style license.
  *
  * @contructor

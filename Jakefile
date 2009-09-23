@@ -28,6 +28,6 @@ jake_hook :build_complete do |build|
   FileUtils.copy all.build_path(:min), 'site/site/javascripts/ojay/all-min.js'
   FileUtils.copy all.build_path(:source), 'site/site/javascripts/ojay/all.js'
   
-  FileUtils.copy 'site/site/javascripts/yui/2.7.0.js', "#{ build.build_directory }/../yui.js"
+  FileUtils.copy 'site/site/javascripts/yui/2.8.0r4.js', "#{ build.build_directory }/../yui.js"
 end
 

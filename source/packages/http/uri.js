@@ -36,7 +36,8 @@ Ojay.URI = new JS.Class('Ojay.URI', {
             
             if (/^\?/.test(string)) string.slice(1).split('&').forEach(function(pair) {
                 var bits = pair.split('=');
-                uri.setParam(bits[0], bits[1].replace('+', ' '));
+                uri.setParam(decodeURIComponent(bits[0]),
+                             decodeURIComponent(bits[1].replace('+', ' ')));
             });
             return uri;
         },
@@ -137,9 +138,18 @@ Ojay.URI = new JS.Class('Ojay.URI', {
      * @param {String} value
      */
     setParam: function(key, value) {
-        var bits = [key, value].map(decodeURIComponent).map('trim');
+        var bits = [key, value].map('trim');
         if (this.keys.indexOf(bits[0]) == -1) this.keys.push(bits[0]);
         this.params[bits[0]] = bits[1];
+    },
+    
+    /**
+     * @param {String} key
+     */
+    removeParam: function(key) {
+        delete this.params[key];
+        var index = this.keys.indexOf(key);
+        if (index > -1) this.keys.splice(index, 1);
     },
     
     /**

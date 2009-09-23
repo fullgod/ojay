@@ -122,7 +122,7 @@
             if (uri.params.jsonp && callbacks.onSuccess) {
                 var handlerID = getHandlerId();
                 uri.setParam(uri.params.jsonp, handlerID);
-                if (uri.params.jsonp !== 'jsonp') delete uri.params.jsonp;
+                if (uri.params.jsonp !== 'jsonp') uri.removeParam('jsonp');
                 window[handlerID] = handleJsonP.partial(callbacks.onSuccess, handlerID);
                 callbacks.onSuccess = null;
             }

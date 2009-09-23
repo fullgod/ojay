@@ -4,7 +4,7 @@
     %meta{'http-equiv' => "Content-type", :content => "text/html; charset=utf-8"}/
     %title
       = 'Ojay: ' + (@title || 'YUI development made easy')
-    =javascripts 'yui/2.7.0', 'ojay/all-min', 'prettify'
+    =javascripts 'yui/2.8.0r4', 'ojay/all-min', 'prettify'
     =stylesheets 'application', 'syntax'
   %body{:onload => 'prettyPrint()'}
     #container
@@ -74,7 +74,7 @@
               %li
                 =link 'Overlays', '/articles/overlays.html'
               %li
-                =link 'Paginators and carousels', '/articles/paginator.html'
+                =link 'Paginators and FilmStrips', '/articles/paginator.html'
               %li
                 =link 'Tabs', '/articles/tabs.html'
             #osi-link
@@ -82,7 +82,7 @@
           .clear
       #footer
         .sub
-          Copyright &copy; 2007&ndash;2008
+          Copyright &copy; 2007&ndash;2009
           =link 'the OTHER media', 'http://othermedia.com'
     :plain
       <script type="text/javascript">

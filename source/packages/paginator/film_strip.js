@@ -20,7 +20,7 @@
  *         &lt;div class="item"&gt;&lt;img src="08.jpg" /&gt;&lt;/div&gt;
  *     &lt;/div&gt;</code></pre>
  *
- * <p>After applying a <tt>FilmStrip</tt> to this markup, its is wrapped in some elements
+ * <p>After applying a <tt>FilmStrip</tt> to this markup, it is wrapped in some elements
  * to facilitate, scrolling, leaving us with:</p>
  *
  * <pre><code>    &lt;div class="filmstrip"&gt;
@@ -160,6 +160,15 @@ Ojay.FilmStrip = new JS.Class('Ojay.FilmStrip', /** @scope Ojay.FilmStrip.protot
     },
     
     /**
+     * @returns {Array}
+     */
+    getScrollLimits: function() {
+        return (this._options.overshoot === false)
+                ? [0, this.getTotalOffset()]
+                : [this._offsetForPage(1), this._offsetForPage(this._numPages)];
+    },
+    
+    /**
      * <p>Returns an Ojay collection wrapping the child elements of the subject.</p>
      * @returns {DomCollection}
      */
@@ -177,6 +186,39 @@ Ojay.FilmStrip = new JS.Class('Ojay.FilmStrip', /** @scope Ojay.FilmStrip.protot
      */
     getPages: function() {
         return this._numPages = this.getItems().length;
+    },
+    
+    /**
+     * <p>Returns the page corresponding to the given absolute offset.</p>
+     * @returns {Number}
+     */
+    _pageFromOffset: function(offset) {
+        var vertical = (this.getDirection() == 'vertical'),
+            method   = vertical ? 'getHeight' : 'getWidth',
+            center   = this.getRegion()[method]() / 2,
+            i        = 1,
+            page     = null;
+        
+        this._getEdges().reduce(function(x,y) {
+            if (page !== null) return;
+            if (x - offset <= center && y - offset >= center) page = i;
+            i += 1;
+            return y;
+        });
+        return page;
+    },
+    
+    /**
+     * <p>Returns the scroll offset fo the given page, ignoring overshoot clipping.</p>
+     * @param {Number} page
+     * @returns {Number}
+     */
+    _offsetForPage: function(page) {
+        var vertical = (this.getDirection() == 'vertical'),
+            method   = vertical ? 'getHeight' : 'getWidth',
+            center   = this.getRegion()[method]() / 2;
+       
+       return this._getCenters()[page - 1] - center;;
     },
     
     /**
@@ -269,7 +311,7 @@ Ojay.FilmStrip = new JS.Class('Ojay.FilmStrip', /** @scope Ojay.FilmStrip.protot
                 var state = this.getInitialState();
                 this.setState('READY');
                 if (this._currentPage === undefined) this._currentPage = state.page;
-                this._handleSetPage(this._currentPage);
+                this.wait(0.001)._handleSetPage(this._currentPage);
                 
                 return this;
             }
@@ -287,18 +329,7 @@ Ojay.FilmStrip = new JS.Class('Ojay.FilmStrip', /** @scope Ojay.FilmStrip.protot
              * @param {Object} scope
              */
             _handleSetPage: function(page, callback, scope) {
-                var vertical = (this.getDirection() == 'vertical'),
-                    method   = vertical ? 'getHeight' : 'getWidth',
-                    center   = this.getRegion()[method]() / 2,
-                    offset   = this._getCenters()[page - 1] - center;
-                
-                if (page !== this._currentPage) {
-                    this.notifyObservers('pagechange', page);
-                    if (page == 1) this.notifyObservers('firstpage');
-                    if (page == this.getPages()) this.notifyObservers('lastpage');
-                }
-                
-                this._currentPage = page;
+                var offset = this._offsetForPage(page);
                 this.setScroll(offset, {animate: true}, callback, scope);
             },
             
@@ -331,13 +362,6 @@ Ojay.FilmStrip = new JS.Class('Ojay.FilmStrip', /** @scope Ojay.FilmStrip.protot
                 if (typeof item !== 'number') item = this._items.indexOf(item) + 1;
                 this.setPage(item);
                 return this;
-            },
-            
-            setScroll: function(amount, options, callback, scope) {
-                if (this._options.overshoot === false)
-                    amount = Math.min(Math.max(amount, 0), this.getTotalOffset());
-                
-                return this.callSuper(amount, options, callback, scope);
             }
         }
     }

@@ -1,10 +1,10 @@
 !!!
-- script_map = lambda { |s| "http://yui.yahooapis.com/2.7.0/build/#{ s.gsub(/\-beta$/, '') }/#{s}.js" }
+- script_map = lambda { |s| "http://yui.yahooapis.com/2.8.0r4/build/#{ s.gsub(/\-beta$/, '') }/#{s}.js" }
 %html
   %head
     %meta{'http-equiv' => "Content-type", :content => "text/html; charset=utf-8"}/
     %title Ojay: Test suite
-    =javascripts 'globals', 'yui/2.7.0', 'ext','sizzle', 'peppy', 'ojay/all', 'test/enumerable', 'test/set'
+    =javascripts 'globals', 'yui/2.8.0r4', 'ext','sizzle', 'peppy', 'ojay/all', 'test/enumerable', 'test/set'
     =stylesheets 'logger', 'testlogger'
     =javascripts *( %w(logger yuitest).map &script_map )
   %body

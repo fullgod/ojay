@@ -1,35 +1,42 @@
 - @title = 'The Paginator class'
 :textile
-  h3. The @Paginator@ class
+  h3. The @Paginator@ and @FilmStrip@ classes
   
-  @Ojay.Paginator@ is a class designed to handle splitting content up into several pages
-  and allowing the user to scroll between them. It allows you to break large galleries
-  up into scrollable areas, and it allows you to lazy-load pages of content into the
-  current page using Ajax.
+  @Ojay.Paginator@ and its related classes are designed to handle splitting content up
+  into several pages and allowing the user to scroll between them. It allows you to break
+  large galleries up into scrollable areas, and it allows you to lazy-load pages of content
+  into the current page using Ajax.
   
   h3. Required files
   
-  * @http://yui.yahooapis.com/2.7.0/build/yahoo-dom-event/yahoo-dom-event.js@
-  * @http://yui.yahooapis.com/2.7.0/build/selector/selector-beta.js@
-  * @http://yui.yahooapis.com/2.7.0/build/animation/animation.js@
+  * @http://yui.yahooapis.com/2.8.0r4/build/yahoo-dom-event/yahoo-dom-event.js@
+  * @http://yui.yahooapis.com/2.8.0r4/build/selector/selector.js@
+  * @http://yui.yahooapis.com/2.8.0r4/build/animation/animation.js@
   * @http://yoursite.com/ojay/js-class.js@
   * @http://yoursite.com/ojay/core.js@
   * @http://yoursite.com/ojay/pkg/paginator.js@
   
   To use @Ojay.AjaxPaginator@:
   
-  * @http://yui.yahooapis.com/2.7.0/build/connection/connection.js@
+  * @http://yui.yahooapis.com/2.8.0r4/build/connection/connection.js@
   * @http://yoursite.com/ojay/pkg/http.js@
   
   To manage history and allow pages to be bookmarked:
   
-  * @http://yui.yahooapis.com/2.7.0/build/history/history.js@
+  * @http://yui.yahooapis.com/2.8.0r4/build/history/history.js@
   * @http://yoursite.com/ojay/pkg/history.js@
   
   To use the YUI @Slider@ control:
   
-  * @http://yui.yahooapis.com/2.7.0/build/dragdrop/dragdrop.js@
-  * @http://yui.yahooapis.com/2.7.0/build/slider/slider.js@
+  * @http://yui.yahooapis.com/2.8.0r4/build/dragdrop/dragdrop.js@
+  * @http://yui.yahooapis.com/2.8.0r4/build/slider/slider.js@
+  
+  h3. Major classes
+  
+  * @Ojay.Paginator@
+  * @Ojay.Paginator.Controls@
+  * @Ojay.AjaxPaginator@
+  * @Ojay.FilmStrip@
   
   h3. Examples
   
@@ -37,6 +44,7 @@
   * "Vertically scrolling gallery with a slider control":/examples/scrolled_gallery.html
   * "Lazy-loading pages of content with Ajax":/examples/ajax_paginator.html
   * "Paginated auto-updating news feed":/examples/updating_pager.html
+  * "Full-size bookmarkable photos in a filmstrip":/examples/filmstrip.html
   
   h3. Setting up your document
   
@@ -346,3 +354,78 @@
   <pre class="prettyprint">    pager.on('pageload', function(paginator, url, response) {
           response.evalScripts();
       });</pre>
+  
+  h3. The @FilmStrip@ class
+  
+  @FilmStrip@ is a variation on the @Paginator@ model that supports a slightly different
+  UI. While @Paginator@ assumes a grid of equally sized elements, @FilmStrip@ supports
+  either a single row of variable-width elements or a single column of variable-height
+  elements. For example, it's useful for "displaying sets of photos":/examples/filmstrip.html.
+  
+  The setup for a @FilmStrip@ is the same as for a @Paginator@ - see "Setting up your
+  document" above. The markup should be of the form:
+  
+  <pre class="prettyprint">    <div id="the-content">
+          <div class="item"><!-- content here --></div>
+          <div class="item"><!-- content here --></div>
+          <div class="item"><!-- content here --></div>
+          <div class="item"><!-- content here --></div>
+          <!-- more items ... -->
+      </div></pre>
+  
+  Instantiate the @FilmStrip@ as follows. Like @Paginator@, it supports the @width@,
+  @height@, @direction@, @scrollTime@ and @easing@ options, and it also supports an
+  option called @overshoot@ which specifies whether the filmstrip should scroll beyond
+  the ends of the strip to force items at either end to display in the center.
+  
+  <pre class="prettyprint">    var strip = new Ojay.FilmStrip('#the-content', {
+          width:      '680px',
+          height:     '120px',
+          direction:  'horizontal',
+          overshoot:  false
+      });
+      strip.setup();</pre>
+  
+  @FilmStrip@ also supports @Ojay.History@ to make each item in the set bookmarkable:
+  
+  <pre class="prettyprint">    var strip = new Ojay.FilmStrip('#my-id', options);
+      Ojay.History.manage(strip, 'gallery');
+      strip.setup();</pre>
+  
+  Since this class only supports a single row or column, it does not add @<div class="page">@
+  elements to your markup. After initialization, the document will contain the following:
+  
+  <pre class="prettyprint">    <div class="filmstrip">
+          <div id="the-content">
+              <div class="item"><!-- content here --></div>
+              <div class="item"><!-- content here --></div>
+              <div class="item"><!-- content here --></div>
+              <div class="item"><!-- content here --></div>
+              <!-- more items ... -->
+          </div>
+      </div></pre>
+  
+  The API for @FilmStrip@ is a subset of that for @Paginator@; all these methods do essentially
+  the same thing as they do for @Paginator@ instances. The API currently supported is:
+  
+  * @strip.addControls(position)@
+  * @strip.getContainer()@
+  * @strip.getSubject()@
+  * @strip.getRegion()@
+  * @strip.getPages()@
+  * @strip.getCurrentPage()@
+  * @strip.setPage(n)@
+  * @strip.incrementPage()@
+  * @strip.decrementPage()@
+  * @strip.snapToPage()@
+  * @strip.setScroll(amount, options)@
+  
+  Note in particular that @push()@, @pop()@, @shift()@ and @unshift()@ (and their related
+  events) are not supported. The following set of events is supported by filmstrips, and
+  have the same behaviour as for paginators:
+  
+  * @pagechange@
+  * @firstpage@
+  * @lastpage@
+  * @scroll@
+  
